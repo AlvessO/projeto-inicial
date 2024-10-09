@@ -210,8 +210,8 @@ public class listagemVIEW extends javax.swing.JFrame {
             
             ArrayList<ProdutosDTO> listagem = produtosdao.listarProdutos();
             
-            for(int i = 0; i < listagem.size(); i++){
-                model.addRow(new Object[]{
+            for (int i = 0; i < listagem.size(); i++) {
+                model.addRow(new Object[] {
                     listagem.get(i).getId(),
                     listagem.get(i).getNome(),
                     listagem.get(i).getValor(),
@@ -219,7 +219,7 @@ public class listagemVIEW extends javax.swing.JFrame {
                 });
             }
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao listar produtos: " + e.getMessage());
         }
-    
     }
 }
