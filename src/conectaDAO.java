@@ -21,13 +21,12 @@ public class conectaDAO {
         Connection conn = null;
         
         try {
+            // Conecta ao banco de dados MySQL "leiloes" com SSL desativado(opcional)
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/leiloes?user=root&password=456&useSSL=false");
         
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/uc11?user=root&password=");
-            
-        } catch (SQLException erro){
-            JOptionPane.showMessageDialog(null, "Erro ConectaDAO" + erro.getMessage());
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "Erro ConectaDAO: " + erro.getMessage());
         }
         return conn;
     }
-    
 }
