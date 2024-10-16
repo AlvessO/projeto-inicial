@@ -8,6 +8,8 @@
  * @author aln
  */
 
+// Implementado tela vendas com lista de produtos vendidos :
+
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
