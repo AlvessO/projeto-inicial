@@ -1,11 +1,14 @@
-
-import java.util.ArrayList;
-import javax.swing.table.DefaultTableModel;
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
+
+
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import java.sql.SQLException;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -136,17 +139,32 @@ public class listagemVIEW extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVenderActionPerformed
-        String id = id_produto_venda.getText();
-        
+    String id = id_produto_venda.getText();
+
+    try {
         ProdutosDAO produtosdao = new ProdutosDAO();
+        produtosdao.venderProduto(Integer.parseInt(id)); 
+        listarProdutos(); 
+        JOptionPane.showMessageDialog(null, "Produto vendido com sucesso!"); 
+    } catch (SQLException ex) {
+       
+        JOptionPane.showMessageDialog(null, "Erro ao vender produto: " + ex.getMessage());
+    } catch (NumberFormatException ex) {
         
-        //produtosdao.venderProduto(Integer.parseInt(id));
-        listarProdutos();
+        JOptionPane.showMessageDialog(null, "ID do produto inválido. Por favor, insira um número.");
+    }
     }//GEN-LAST:event_btnVenderActionPerformed
 
     private void btnVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendasActionPerformed
-        //vendasVIEW vendas = new vendasVIEW(); 
-        //vendas.setVisible(true);
+                                          
+    try {
+        ProdutosDAO produtosDAO = new ProdutosDAO();  
+        List<ProdutosDTO> produtosVendidos = produtosDAO.listarProdutosVendidos(); 
+        TelaVendas telaVendas = new TelaVendas(produtosVendidos);  
+        telaVendas.setVisible(true);
+    } catch (SQLException ex) {
+        ex.printStackTrace(); 
+    }
     }//GEN-LAST:event_btnVendasActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
